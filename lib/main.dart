@@ -8,9 +8,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'PINTEREST CLON',
-      home: Scaffold(
-        body: PinterestScreen()
-      ),
+      home: PinterestScreen(),
     );
   }
 }
