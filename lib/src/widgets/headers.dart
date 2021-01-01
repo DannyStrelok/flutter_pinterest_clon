@@ -263,6 +263,12 @@ class _HeaderCurvoPainter extends CustomPainter{
 }
 
 class HeaderOla extends StatelessWidget {
+
+  final Color color;
+
+
+  HeaderOla({this.color});
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -270,13 +276,21 @@ class HeaderOla extends StatelessWidget {
       width: double.infinity,
       //color: Color(0xff615AAB),
       child: CustomPaint(
-        painter: _HeaderOlaPainter(),
+        painter: _HeaderOlaPainter(this.color),
       ),
     );
   }
 }
 
 class _HeaderOlaPainter extends CustomPainter{
+
+  final Color color;
+
+
+  _HeaderOlaPainter(
+      this.color
+      );
+
   @override
   void paint(Canvas canvas, Size size) {
 
@@ -285,7 +299,7 @@ class _HeaderOlaPainter extends CustomPainter{
         end: Alignment.bottomCenter,
         colors: [
           Colors.red,
-          Colors.greenAccent,
+          this.color,
           Color(0xff6D05FA)
         ],
         stops: [
@@ -300,7 +314,7 @@ class _HeaderOlaPainter extends CustomPainter{
     );
 
     final paint = Paint()..shader = gradient.createShader(rect);
-    //paint.color = Color(0xff615AAB);
+    paint.color = this.color; //Color(0xff615AAB);
     paint.style = PaintingStyle.fill;
     paint.strokeWidth = 2.0;
 

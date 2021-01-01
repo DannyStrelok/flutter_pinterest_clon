@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_pinterest/src/theme/theme.dart';
 import 'package:flutter_pinterest/src/widgets/radial_progress.dart';
+import 'package:provider/provider.dart';
 
 class GraficasCircularesScreen extends StatefulWidget {
   @override
@@ -12,6 +14,9 @@ class _GraficasCircularesScreenState extends State<GraficasCircularesScreen> {
 
   @override
   Widget build(BuildContext context) {
+
+    final appTheme = Provider.of<ThemeChanger>(context).currentTheme;
+
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         onPressed: () {
@@ -36,7 +41,7 @@ class _GraficasCircularesScreenState extends State<GraficasCircularesScreen> {
                 child: RadiaProgress(
                   porcentaje: porcentaje,
                   colorPrimario: Colors.green,
-                  colorSecundario: Colors.red,
+                  colorSecundario: appTheme.textTheme.bodyText1.color,
                   grosorSecundario: 1.0,
                 ),
               ),
@@ -46,7 +51,7 @@ class _GraficasCircularesScreenState extends State<GraficasCircularesScreen> {
                 child: RadiaProgress(
                   porcentaje: porcentaje,
                   colorPrimario: Colors.green,
-                  colorSecundario: Colors.red,
+                  colorSecundario: appTheme.textTheme.bodyText1.color,
                   grosorSecundario: 1.0,
                 ),
               )
@@ -61,7 +66,7 @@ class _GraficasCircularesScreenState extends State<GraficasCircularesScreen> {
                 child: RadiaProgress(
                   porcentaje: porcentaje,
                   colorPrimario: Colors.green,
-                  colorSecundario: Colors.red,
+                  colorSecundario: appTheme.textTheme.bodyText1.color,
                   grosorSecundario: 1.0,
                 ),
               ),
@@ -71,7 +76,7 @@ class _GraficasCircularesScreenState extends State<GraficasCircularesScreen> {
                 child: RadiaProgress(
                   porcentaje: porcentaje,
                   colorPrimario: Colors.green,
-                  colorSecundario: Colors.red,
+                  colorSecundario: appTheme.textTheme.bodyText1.color,
                   grosorSecundario: 1.0,
                 ),
               )
