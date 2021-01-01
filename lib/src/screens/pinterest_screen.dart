@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_pinterest/src/theme/theme.dart';
 import 'package:flutter_pinterest/src/widgets/pinterest_menu_widget.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:provider/provider.dart';
@@ -102,8 +103,8 @@ class _PinterestMenuPositioned extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-
     final menuModelProvider = Provider.of<_menuModel>(context);
+    final appTheme = Provider.of<ThemeChanger>(context).currentTheme;
 
     return AnimatedPositioned(
         duration: Duration(milliseconds: 250),
@@ -114,6 +115,8 @@ class _PinterestMenuPositioned extends StatelessWidget {
             alignment: Alignment.center,
             child: PinterestMenu(
               showing: menuModelProvider.showing,
+              backgroundColor: appTheme.scaffoldBackgroundColor,
+              activeColor: appTheme.accentColor,
               // backgroundColor: Colors.red,
               // activeColor: Colors.yellow,
               // inactiveColor: Colors.blue,

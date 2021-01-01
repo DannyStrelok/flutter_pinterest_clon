@@ -564,12 +564,19 @@ class CameraApp extends StatelessWidget {
         controller: controller,
         children: [
           CameraExampleHome(),
-          Container(
-            width: double.infinity,
-            height: double.infinity,
-            color: Colors.blueGrey,
-            child: Center(
-              child: Text('THE PLAN'),
+          Scaffold(
+            floatingActionButton: FloatingActionButton(
+              onPressed: () {
+                controller.animateToPage(0, duration: Duration(milliseconds: 350), curve: Curves.easeInOut);
+                // Navigator.pop(context);
+              },
+              child: Icon(Icons.camera_alt),
+            ),
+            body: Container(
+              color: Colors.blueGrey,
+              child: Center(
+                child: Text('Cámara a tu izquierda. Deslízame.', style: TextStyle(color: Colors.white, fontSize: 20),),
+              ),
             ),
           )
         ],
