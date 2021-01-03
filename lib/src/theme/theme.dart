@@ -11,7 +11,9 @@ class ThemeChanger with ChangeNotifier {
         {
           _darkTheme = false;
           _customTheme = false;
-          _currentTheme = ThemeData.light();
+          _currentTheme = ThemeData.light().copyWith(
+            accentColor: Colors.pink
+          );
         }
         break;
       case 2:
@@ -40,7 +42,9 @@ class ThemeChanger with ChangeNotifier {
       default: {
         _darkTheme = false;
         _customTheme = false;
-        _currentTheme = ThemeData.light();
+        _currentTheme = ThemeData.light().copyWith(
+            accentColor: Colors.pink
+        );
       }
 
     }
@@ -56,7 +60,9 @@ class ThemeChanger with ChangeNotifier {
           accentColor: Colors.pink
       );
     } else {
-      _currentTheme = ThemeData.light();
+      _currentTheme = ThemeData.light().copyWith(
+          accentColor: Colors.pink
+      );
     }
     notifyListeners();
   }
@@ -76,13 +82,13 @@ class ThemeChanger with ChangeNotifier {
         )
       );
     } else {
-      _currentTheme = ThemeData.light();
+      _currentTheme = ThemeData.light().copyWith(
+          accentColor: Colors.pink
+      );
     }
     notifyListeners();
   }
 
   ThemeData get currentTheme => _currentTheme;
-
-
 
 }

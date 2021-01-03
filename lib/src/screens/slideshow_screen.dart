@@ -10,40 +10,48 @@ class SlideshowScreen extends StatelessWidget {
 
     final appTheme = Provider.of<ThemeChanger>(context);
 
+    bool isLarge = false;
+    if(MediaQuery.of(context).size.height > 500) {
+      isLarge = true;
+    }
+
+    final children = [
+      Expanded( // EL SLIDESHOW NECESITA UN TAMAÑO DEFINIDO PARA FUNCIONAR, YA QUE EL COLUMN TIENE UN ALTO INFINITO
+        child: Slideshow(
+          indicatorPositionTop: false,
+          bulletPrimary: 17,
+          bulletSecondary: 10,
+          colorPrimary: (appTheme.darkTheme) ? appTheme.currentTheme.accentColor : Colors.red,
+          colorSecondary: Colors.green,
+          slides: [
+            SvgPicture.asset('assets/svgs/slide_1.svg'),
+            SvgPicture.asset('assets/svgs/slide_2.svg'),
+            SvgPicture.asset('assets/svgs/slide_3.svg'),
+            SvgPicture.asset('assets/svgs/slide_4.svg'),
+          ],
+        ),
+      ),
+      Expanded(
+        child: Slideshow(
+          indicatorPositionTop: false,
+          bulletPrimary: 25,
+          bulletSecondary: 8,
+          slides: [
+            SvgPicture.asset('assets/svgs/slide_1.svg'),
+            SvgPicture.asset('assets/svgs/slide_2.svg'),
+            SvgPicture.asset('assets/svgs/slide_3.svg'),
+            SvgPicture.asset('assets/svgs/slide_4.svg'),
+          ],
+        ),
+      ),
+    ];
+
     return Scaffold(
-      body: Column(
-        children: [
-          Expanded( // EL SLIDESHOW NECESITA UN TAMAÑO DEFINIDO PARA FUNCIONAR, YA QUE EL COLUMN TIENE UN ALTO INFINITO
-            child: Slideshow(
-              indicatorPositionTop: false,
-              bulletPrimary: 17,
-              bulletSecondary: 10,
-              colorPrimary: (appTheme.darkTheme) ? appTheme.currentTheme.accentColor : Colors.red,
-              colorSecondary: Colors.green,
-              slides: [
-                SvgPicture.asset('assets/svgs/slide_1.svg'),
-                SvgPicture.asset('assets/svgs/slide_2.svg'),
-                SvgPicture.asset('assets/svgs/slide_3.svg'),
-                SvgPicture.asset('assets/svgs/slide_4.svg'),
-              ],
-            ),
-          ),
-          Expanded(
-            child: Slideshow(
-              indicatorPositionTop: false,
-              bulletPrimary: 25,
-              bulletSecondary: 8,
-              slides: [
-                SvgPicture.asset('assets/svgs/slide_1.svg'),
-                SvgPicture.asset('assets/svgs/slide_2.svg'),
-                SvgPicture.asset('assets/svgs/slide_3.svg'),
-                SvgPicture.asset('assets/svgs/slide_4.svg'),
-              ],
-            ),
-          ),
-          
-        ],
-      )
+      body: (isLarge)
+          ? Column(
+            children: children,
+          )
+          : Row(children: children,)
     );
   }
 }

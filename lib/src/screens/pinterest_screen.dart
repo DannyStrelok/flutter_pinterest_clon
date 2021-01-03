@@ -37,12 +37,12 @@ class _PinterestGridState extends State<PinterestGrid> {
   void initState() {
     super.initState();
     controller.addListener(() {
-      print('scroll listerner ${controller.offset}');
+      // print('scroll listerner ${controller.offset}');
       if (controller.offset > lastScrollPosition && controller.offset > 200) {
-        print('ocultar menu');
+        // print('ocultar menu');
         Provider.of<_menuModel>(context, listen: false).showing = false;
       } else {
-        print('mostrar menu');
+        // print('mostrar menu');
         Provider.of<_menuModel>(context, listen: false).showing = true;
       }
 
@@ -58,15 +58,21 @@ class _PinterestGridState extends State<PinterestGrid> {
 
   @override
   Widget build(BuildContext context) {
+
+    int count = 2;
+    if(MediaQuery.of(context).size.width > 500) {
+      count = 4;
+    }
+
     return StaggeredGridView.countBuilder(
       physics: BouncingScrollPhysics(),
       controller: controller,
       padding: EdgeInsets.symmetric(horizontal: 15, vertical: 40),
-      crossAxisCount: 4,
+      crossAxisCount: count,
       itemCount: items.length,
       itemBuilder: (BuildContext context, int index) => _PinterestItem(index),
       staggeredTileBuilder: (int index) =>
-          new StaggeredTile.count(2, index.isEven ? 2 : 3),
+          new StaggeredTile.count(1, index.isEven ? 1 : 2),
       mainAxisSpacing: 10.0,
       crossAxisSpacing: 10.0,
     );
@@ -105,44 +111,51 @@ class _PinterestMenuPositioned extends StatelessWidget {
     final size = MediaQuery.of(context).size;
     final menuModelProvider = Provider.of<_menuModel>(context);
     final appTheme = Provider.of<ThemeChanger>(context).currentTheme;
+    double anchoPantalla = size.width;
+
+    if(size.width > 500) {
+      anchoPantalla = anchoPantalla - 300;
+    }
 
     return AnimatedPositioned(
         duration: Duration(milliseconds: 250),
         bottom: (menuModelProvider.showing) ? 30 : -100,
         child: Container(
-          width: size.width,
-          child: Align(
-            alignment: Alignment.center,
-            child: PinterestMenu(
-              showing: menuModelProvider.showing,
-              backgroundColor: appTheme.scaffoldBackgroundColor,
-              activeColor: appTheme.accentColor,
-              // backgroundColor: Colors.red,
-              // activeColor: Colors.yellow,
-              // inactiveColor: Colors.blue,
-              items: [
-                PinterestButton(
-                    icon: Icons.pie_chart,
-                    onPressed: () {
-                      print('primer boton');
-                    }),
-                PinterestButton(
-                    icon: Icons.search,
-                    onPressed: () {
-                      print('segundo boton');
-                    }),
-                PinterestButton(
-                    icon: Icons.notifications,
-                    onPressed: () {
-                      print('tercer boton');
-                    }),
-                PinterestButton(
-                    icon: Icons.supervised_user_circle,
-                    onPressed: () {
-                      print('cuarto boton');
-                    }),
-              ],
-            ),
+          width: anchoPantalla,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              PinterestMenu(
+                showing: menuModelProvider.showing,
+                backgroundColor: appTheme.scaffoldBackgroundColor,
+                activeColor: appTheme.accentColor,
+                // backgroundColor: Colors.red,
+                // activeColor: Colors.yellow,
+                // inactiveColor: Colors.blue,
+                items: [
+                  PinterestButton(
+                      icon: Icons.pie_chart,
+                      onPressed: () {
+                        print('primer boton');
+                      }),
+                  PinterestButton(
+                      icon: Icons.search,
+                      onPressed: () {
+                        print('segundo boton');
+                      }),
+                  PinterestButton(
+                      icon: Icons.notifications,
+                      onPressed: () {
+                        print('tercer boton');
+                      }),
+                  PinterestButton(
+                      icon: Icons.supervised_user_circle,
+                      onPressed: () {
+                        print('cuarto boton');
+                      }),
+                ],
+              ),
+            ],
           ),
         ));
   }

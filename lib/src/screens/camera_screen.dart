@@ -61,6 +61,7 @@ class _CameraExampleHomeState extends State<CameraExampleHome>
   void getAvailableCameras() async {
     try {
       cameras = await availableCameras();
+      print(cameras.length);
       if(cameras.length > 0) {
         onNewCameraSelected(cameras[0]);
       }
@@ -137,6 +138,7 @@ class _CameraExampleHomeState extends State<CameraExampleHome>
 
   /// Display the preview from the camera (or a message if the preview is not available).
   Widget _cameraPreviewWidget() {
+
     if (controller == null || !controller.value.isInitialized) {
       return const Text(
         'Tap a camera',
@@ -358,11 +360,15 @@ class _CameraExampleHomeState extends State<CameraExampleHome>
     if (controller != null) {
       await controller.dispose();
     }
+    print(cameraDescription);
     controller = CameraController(
       cameraDescription,
       ResolutionPreset.medium,
       enableAudio: enableAudio,
     );
+
+    print('controlador');
+    print(controller);
 
     // If the controller is updated then update the UI.
     controller.addListener(() {
@@ -553,7 +559,7 @@ class _CameraExampleHomeState extends State<CameraExampleHome>
 }
 
 class CameraApp extends StatelessWidget {
-  final PageController controller = new PageController(
+  final PageController _pageController = new PageController(
       initialPage: 1
   );
 
@@ -561,13 +567,13 @@ class CameraApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: PageView(
-        controller: controller,
+        controller: _pageController,
         children: [
           CameraExampleHome(),
           Scaffold(
             floatingActionButton: FloatingActionButton(
               onPressed: () {
-                controller.animateToPage(0, duration: Duration(milliseconds: 350), curve: Curves.easeInOut);
+                _pageController.animateToPage(0, duration: Duration(milliseconds: 350), curve: Curves.easeInOut);
                 // Navigator.pop(context);
               },
               child: Icon(Icons.camera_alt),
